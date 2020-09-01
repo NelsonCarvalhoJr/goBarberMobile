@@ -8,6 +8,8 @@ import { Platform, Alert } from 'react-native';
 import { useAuth } from '../../hooks/auth';
 import api from '../../services/api';
 
+import defaultAvatarImg from '../../assets/default-avatar.png';
+
 import {
   Container,
   Header,
@@ -159,7 +161,9 @@ const CreateAppointment: React.FC = () => {
 
         <HeaderTitle>Cabeleireiros</HeaderTitle>
 
-        <UserAvatar source={{ uri: user.avatar_url }} />
+        <UserAvatar
+          source={user.avatar_url ? { uri: user.avatar_url } : defaultAvatarImg}
+        />
       </Header>
 
       <Content>
@@ -174,7 +178,13 @@ const CreateAppointment: React.FC = () => {
                 onPress={() => handleSelectProvider(provider.id)}
                 selected={provider.id === selectedProvider}
               >
-                <ProviderAvatar source={{ uri: provider.avatar_url }} />
+                <ProviderAvatar
+                  source={
+                    provider.avatar_url
+                      ? { uri: provider.avatar_url }
+                      : defaultAvatarImg
+                  }
+                />
                 <ProviderName selected={provider.id === selectedProvider}>
                   {provider.name}
                 </ProviderName>
